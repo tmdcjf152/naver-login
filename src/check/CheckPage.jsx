@@ -376,7 +376,7 @@ const CheckPage = () => {
 						<input type='checkbox' name='save-id' id='check-three' checked={checkThree} onChange={checkThreeBtn} />
 						<label for='check-three' />
 						<span>
-							위치기반서비스 이용약관 동의 <span className='gray'>(선택)</span>
+							위치기반서비스 이용약관 동의 <span className='green'>(필수)</span>
 						</span>
 						{/* 위치기반 */}
 						<article>
