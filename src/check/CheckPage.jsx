@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { green } from '../style/theme';
@@ -7,6 +8,7 @@ const CheckPageBlock = styled.main`
 	justify-content: center;
 	width: 100%;
 	height: 100vh;
+	background: rgb(245, 246, 248);
 	/* 체크박스 공통 CSS */
 	input[type='checkbox'] {
 		display: none;
@@ -119,35 +121,108 @@ const CheckPageBlock = styled.main`
 				overflow: scroll;
 				font-size: 0.7rem;
 				border: 1px solid #ddd;
+				background: #fff;
 			}
 			.border-none {
 				border: none;
 			}
 		}
-    .btn-box{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      a{
-        width: 49%;
-        height: 50px;
-        &:nth-of-type(1){
-          background: #999;
-          color: #fff;
-          font: bold 1rem/1 'apple';
-        }
-        &:nth-of-type(2){
-          background: ${green};
-          color: #fff;
-          font: bold 1rem/1 'apple';
-        }
-      }
-    }
+		.btn-box {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			width: 100%;
+			.disabled-on {
+				background: #999;
+			}
+			.disabled-off {
+				background: ${green};
+			}
+			a {
+				width: 40%;
+				height: 50px;
+				&:nth-of-type(1) {
+					background: #999;
+					color: #fff;
+					font: bold 1rem/1 'apple';
+				}
+				&:nth-of-type(2) {
+					color: #fff;
+					font: bold 1rem/1 'apple';
+				}
+			}
+		}
 	}
 `;
 
 const CheckPage = () => {
+	const [allCheck, setAllCheck] = useState(false);
+	const [checkOne, setCheckOne] = useState(false);
+	const [checkTwo, setCheckTwo] = useState(false);
+	const [checkThree, setCheckThree] = useState(false);
+	const [checkFour, setCheckFour] = useState(false);
+	const [disabled, setDisabled] = useState(false);
+
+	const allBtnEvent = () => {
+		if (allCheck == false) {
+			setAllCheck(true);
+			setCheckOne(true);
+			setCheckTwo(true);
+			setCheckThree(true);
+			setCheckFour(true);
+		} else {
+			setAllCheck(false);
+			setCheckOne(false);
+			setCheckTwo(false);
+			setCheckThree(false);
+			setCheckFour(false);
+		}
+	};
+	const checkOneBtn = () => {
+		if (checkOne == false) {
+			setCheckOne(true);
+		} else {
+			setCheckOne(false);
+		}
+	};
+	const checkTwoBtn = () => {
+		if (checkTwo == false) {
+			setCheckTwo(true);
+		} else {
+			setCheckTwo(false);
+		}
+	};
+	const checkThreeBtn = () => {
+		if (checkThree == false) {
+			setCheckThree(true);
+		} else {
+			setCheckThree(false);
+		}
+	};
+	const checkFourBtn = () => {
+		if (checkFour == false) {
+			setCheckFour(true);
+		} else {
+			setCheckFour(false);
+		}
+	};
+
+	useEffect(() => {
+		if (checkOne == true && checkTwo == true && checkThree == true && checkFour == true) {
+			setAllCheck(true);
+		} else {
+			setAllCheck(false);
+		}
+	}, [checkOne, checkTwo, checkThree, checkFour]);
+
+	useEffect(() => {
+		if (checkOne == true && checkTwo == true && checkThree == true) {
+			setDisabled(true);
+		} else {
+			setDisabled(false);
+		}
+	}, [checkOne, checkTwo, checkThree]);
+
 	return (
 		<CheckPageBlock>
 			<div className='check-inner-box'>
@@ -167,7 +242,7 @@ const CheckPage = () => {
 
 				<article className='all-check-box'>
 					<section className='all-check'>
-						<input type='checkbox' name='check-all' id='check-all' />
+						<input type='checkbox' name='check-all' id='check-all' checked={allCheck} onChange={allBtnEvent} />
 						<label for='check-all'>
 							<span className='all-check-text'>
 								<strong>네이버 이용약관, 개인정보 수집 및 이용, 위치기반서비스 이용약관(선택), 프로모션 정보 수신(선택)에 모두 동의합니다.</strong>
@@ -176,8 +251,8 @@ const CheckPage = () => {
 					</section>
 
 					<section className='check-one'>
-						<input type='checkbox' name='save-id' id='save-id' />
-						<label for='save-id' />
+						<input type='checkbox' name='save-id' id='check-one' checked={checkOne} onChange={checkOneBtn} />
+						<label for='check-one' />
 						<span>
 							네이버 이용약관 동의 <span className='green'>(필수)</span>
 						</span>
@@ -237,8 +312,8 @@ const CheckPage = () => {
 						</article>
 					</section>
 					<section>
-						<input type='checkbox' name='save-id' id='save-id' />
-						<label for='save-id' />
+						<input type='checkbox' name='save-id' id='check-two' checked={checkTwo} onChange={checkTwoBtn} />
+						<label for='check-two' />
 						<span>
 							개인정보 수집 및 이용 동의 <span className='green'>(필수)</span>
 						</span>
@@ -298,8 +373,8 @@ const CheckPage = () => {
 						</article>
 					</section>
 					<section>
-						<input type='checkbox' name='save-id' id='save-id' />
-						<label for='save-id' />
+						<input type='checkbox' name='save-id' id='check-three' checked={checkThree} onChange={checkThreeBtn} />
+						<label for='check-three' />
 						<span>
 							위치기반서비스 이용약관 동의 <span className='gray'>(선택)</span>
 						</span>
@@ -359,8 +434,8 @@ const CheckPage = () => {
 						</article>
 					</section>
 					<section>
-						<input type='checkbox' name='save-id' id='save-id' />
-						<label for='save-id' />
+						<input type='checkbox' name='save-id' id='check-four' checked={checkFour} onChange={checkFourBtn} />
+						<label for='check-four' />
 						<span>
 							프로모션 정보 수신 동의<span className='gray'>(선택)</span>{' '}
 						</span>
@@ -372,10 +447,14 @@ const CheckPage = () => {
 						</article>
 					</section>
 				</article>
-        <div className="btn-box">
-          <NavLink className='center' to='/'>취소</NavLink>
-          <NavLink className='center' to='/signup'>확인</NavLink>
-        </div>
+				<div className='btn-box'>
+					<NavLink className='center' to='/'>
+						취소
+					</NavLink>
+					<NavLink className={disabled == true ? 'center disabled-off' : 'center disabled-on'} to='/signup' aria-disabled='true'>
+						확인
+					</NavLink>
+				</div>
 			</div>
 		</CheckPageBlock>
 	);

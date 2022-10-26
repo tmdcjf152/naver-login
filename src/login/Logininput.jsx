@@ -50,6 +50,7 @@ const LogininputBlock = styled.article`
 		flex-grow: 1;
 		width: 100%;
 		height: 50px;
+		
 		.nav-item {
 			display: flex;
 			justify-content: center;
@@ -57,7 +58,7 @@ const LogininputBlock = styled.article`
 			width: 33%;
 			background: #f8f9fb;
 			color: #000;
-			border-radius:10px;
+			border-radius: 10px;
 			.nav-link {
 				color: #888;
 			}
@@ -207,8 +208,11 @@ const LogininputBlock = styled.article`
 		align-items: center;
 		flex-direction: column;
 		padding: 3rem;
+
 		.green {
+			padding: 0rem 0.5rem;
 			color: ${green};
+			
 		}
 		span {
 			font-size: 0.9rem;
@@ -271,6 +275,7 @@ const Logininput = () => {
 	const [pwdValue, setPwdValue] = useState('');
 	const [error, setError] = useState('');
 
+
 	const loginErrorHandler = () => {
 		if (idValue.length < 1) {
 			setError('아이디를 입력해주세요');
@@ -285,6 +290,7 @@ const Logininput = () => {
 			setError('');
 		}
 	}, [idValue, pwdValue]);
+
 
 	return (
 		<LogininputBlock>
@@ -370,25 +376,8 @@ const Logininput = () => {
 						<button className='login-btn'>로그인</button>
 					</div>
 				</Tab>
-				<Tab eventKey='qr-login' title='QR코드'>
-					<div className='qr-login-box'>
-						<div className='img-box'>
-							<img
-								src='data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAACA0lEQVR42tWYPY6DMBSEH6JwyRG4SXyxSCBxsXATH8ElBeLtzDNJaFJmdpfCMXwUI97fOOafLvvL5DBc2Zfix7AU67Db+EhIBvftNiyOu76kw+62ZfeiJPO5fQxObfu43fCOmHCbHnbnQ7PfILlOjqhMxQwC5YTxYVQMGeJeIfAaOQFhQiJDyvZeLtkrIK0oq42++jwmZ71cK/j7hNogBt/kmZ6eVnwiHfGKLZtE4jt4OLmvlCojx7AzHD3vsQC/61RFHCWKBSFBw2LfjIrVESQHchQlGnUa8bGmTUWozVmsUSpI1FA5jzrClQGK5ChoErMl9i8l2Uem54iJgVxhqSTHO1LCewjMNYLUt/mpJOxQlSMb2lLEZ33FR0EOw7jKKNGtA7aID4jpCGLhLSC4WLFhobwICXSEa7MYnbenfdASmkc6BxtRKv0lchrCqBiSg86BbQoVezRtIhLjimJgGjg72m1zNSoS0xqTKodxqlGnTZuKIDMjR8NHddw957aKoE3xJNGSIxrHiv6lJKGt5+Da6SXnsHRFSjy+SfNvOVKWVkZGwq8eFiaO/breLca4jpw+fuYPzjLUFgcLIeFZJlf6xuH0b5A6FSXhibL1KsSnq1GlvZ4srWVyaUWjJvwcp3lc4iRhSnKeaenfYKHYJMLX6oidPv51pH/1axH5n/+/fSQ/nwTRB8RNlUcAAAAASUVORK5CYII='
-								alt='qr-code-login'
-							/>
-							<span>
-								남은시간 <Timer />
-							</span>
-						</div>
-						<div className='text-box'>
-							<span>
-								공용 네트워크, 공용 PC라면 안전을 위해
-								<br />
-								QR코드로 로그인해 주세요
-							</span>
-						</div>
-					</div>
+				<Tab eventKey='qr-login' title='QR코드' >
+					<Timer/>
 				</Tab>
 			</Tabs>
 		</LogininputBlock>
