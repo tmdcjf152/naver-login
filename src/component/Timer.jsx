@@ -32,13 +32,13 @@ const TimerBlock = styled.div`
 const Timer = () => {
 	const [min, setMin] = useState(3);
 	const [sec, setSec] = useState(0);
-	const time = useRef(5)
+	const time = useRef(180)
 	const timerId = useRef(null);
 	
 
 	useEffect(() => {
 		timerId.current = setInterval(() => {
-			setMin(parseInt(time.current / 60));
+			setMin(parseInt(time.current / 60));	
 			setSec(time.current % 60);
 			time.current -= 1;
 		}, 1000);
