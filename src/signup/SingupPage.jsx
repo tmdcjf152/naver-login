@@ -415,9 +415,9 @@ const SingupPage = () => {
 						<span className='error-msg'>{phoneError}</span>
 					</div>
 
-					<button className='signup-btn center' disabled={signup} onClick={()=>{location.href='/'}}>
+					<NavLink className='signup-btn center' disabled={signup} onClick={()=>{location.href='/naver-login/'}}>
 						가입하기
-					</button>
+					</NavLink>
 				</div>
 			</div>
 		</SingupPageBlock>
